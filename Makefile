@@ -3,3 +3,5 @@ s:
 m:
 	uv run python manage.py makemigrations
 	uv run python manage.py migrate
+sh:
+	uv run python manage.py shell
