@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dotenv
 import dj_database_url
+from datetime import timedelta
 
 dotenv.load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,11 +43,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "dj_database_url",
+    "django_extensions",
     "djoser",
     "rest_framework_simplejwt",
     "todo_list",
     "users",
     "tags",
+    "tasks",
 ]
 
 MIDDLEWARE = [
@@ -148,4 +151,9 @@ DJOSER = {
         "user_create": "users.serializers.UserCreateSerializer",
         "user": "users.serializers.UserSerializer",
     },
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
