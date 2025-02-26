@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 import dotenv
+import dj_database_url
 
 dotenv.load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 SECRET_KEY = os.getenv("SECRET_KEY")
-
+DATABASE_URL = os.getenv("DATABASE_URL")
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "dj_database_url",
     "djoser",
     "rest_framework_simplejwt",
     "todo_list",
@@ -82,10 +84,9 @@ WSGI_APPLICATION = "todo_list.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": dj_database_url.config(
+        default=DATABASE_URL,
+    )
 }
 
 
