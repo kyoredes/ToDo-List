@@ -5,6 +5,7 @@ from comments.database import dbconfig
 from sqlalchemy.ext.asyncio import AsyncSession
 from comments.external_backend import fetch_task
 from comments.config import settings
+from main_config import main_settings
 from .models.comment_models import Comment
 import logging
 from comments.redis import get_redis
@@ -13,7 +14,7 @@ from redis.asyncio import Redis
 from fastapi.encoders import jsonable_encoder
 
 logger = logging.getLogger(__name__)
-BASE_BACKEND_URL = settings.BASE_BACKEND_URL
+BASE_BACKEND_URL = main_settings.BASE_BACKEND_URL
 
 router = APIRouter(prefix="/comments", tags=["comments"])
 

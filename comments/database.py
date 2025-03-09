@@ -1,3 +1,4 @@
+from main_config import main_settings
 from comments.config import settings
 from contextlib import asynccontextmanager
 from sqlalchemy.ext.asyncio import (
@@ -8,11 +9,13 @@ from sqlalchemy.ext.asyncio import (
 )
 from asyncio import current_task
 
+BASE_MICROSERVICE_URL = main_settings.BASE_MICROSERVICE_URL
+
 
 class DbConfig:
     def __init__(self, url: str, echo: bool = True):
         self.async_engine = create_async_engine(
-            settings.DATABASE_URL_FASTAPI,
+            BASE_MICROSERVICE_URL,
             echo=settings.DEBUG,
             connect_args={"check_same_thread": False},
         )
@@ -34,4 +37,4 @@ class DbConfig:
         await session.close()
 
 
-dbconfig = DbConfig(url=settings.DATABASE_URL_FASTAPI, echo=settings.DEBUG)
+dbconfig = DbConfig(url=BASE_MICROSERVICE_URL, echo=settings.DEBUG)
